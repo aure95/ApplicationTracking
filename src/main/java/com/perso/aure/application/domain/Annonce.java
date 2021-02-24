@@ -1,6 +1,6 @@
 package com.perso.aure.application.domain;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,12 +12,6 @@ public class Annonce {
 	private String url;
 	private String name;
 	private Date date;
-	
-	public Annonce(String url, String name, Date date) {
-		this.url= url;
-		this.name = name;
-		this.date = date;
-	}
 	
 	public String getUrl() {
 		return url;
