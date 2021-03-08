@@ -1,9 +1,7 @@
 package com.perso.aure.application.domain;
 
-
 import javax.persistence.Entity;
-
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 @Entity
 public class Status {
