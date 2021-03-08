@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Application {
@@ -14,6 +16,10 @@ public class Application {
 	private Integer id;
 	private Date date;
 	private String label_status;
+	
+	@ManyToOne(optional = false)
+	@JoinColumn(name= "fk_status_label", referencedColumnName= "label")
+	private Status status;
 	
 	public Integer getId() {
 		return id;
