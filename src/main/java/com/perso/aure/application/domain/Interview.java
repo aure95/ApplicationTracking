@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Interview {
@@ -12,6 +14,10 @@ public class Interview {
 	private String adress;
 	private String contactName;
 	private Date date;
+	
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "fk_application_id", referencedColumnName = "id")
+	private Application application;
 	
 	public String getAdress() {
 		return adress;
@@ -31,9 +37,16 @@ public class Interview {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	@Override
+	public Application getApplication() {
+		return application;
+	}
+	public void setApplication(Application application) {
+		this.application = application;
+	}
+	
 	public String toString() {
-		return "Interview [adress=" + adress + ", contactName=" + contactName + ", date=" + date + "]";
+		return "Interview [adress=" + adress + ", contactName=" + contactName + ", date=" + date + ", application="
+				+ application + "]";
 	}
 	
 }
