@@ -1,9 +1,13 @@
 package com.perso.aure.application.domain;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Annonce {
@@ -13,6 +17,32 @@ public class Annonce {
 	private String name;
 	private Date date;
 	
+	@ManyToMany
+	@JoinTable(name = "annonce_domain",
+	joinColumns = @JoinColumn(name = "annonce_url"),
+	inverseJoinColumns = @JoinColumn(name = "domain_name"))
+	private Set<Domain> domains;
+	
+	@ManyToMany(mappedBy = "annonces")
+	private Set<Website> websites;
+	
+	
+	public Set<Domain> getDomains() {
+		return domains;
+	}
+
+	public void setDomains(Set<Domain> domains) {
+		this.domains = domains;
+	}
+
+	public Set<Website> getWebsites() {
+		return websites;
+	}
+
+	public void setWebsites(Set<Website> websites) {
+		this.websites = websites;
+	}
+
 	public String getUrl() {
 		return url;
 	}
@@ -38,7 +68,8 @@ public class Annonce {
 	}
 
 	public String toString() {
-		return "Annonce [url=" + url + ", name=" + name + ", date=" + date + "]";
+		return "Annonce [url=" + url + ", name=" + name + ", date=" + date + ", domains=" + domains + ", websites="
+				+ websites + "]";
 	}
 
 }
