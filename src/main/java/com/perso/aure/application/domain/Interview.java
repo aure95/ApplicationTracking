@@ -15,7 +15,7 @@ public class Interview {
 	private String contactName;
 	private Date date;
 	
-	@ManyToOne(optional = false)
+	@ManyToOne
 	@JoinColumn(name = "fk_application_id", referencedColumnName = "id")
 	private Application application;
 	
@@ -45,8 +45,7 @@ public class Interview {
 	}
 	
 	public String toString() {
-		return "Interview [adress=" + adress + ", contactName=" + contactName + ", date=" + date + ", application="
-				+ application + "]";
+		return "Interview [adress=" + adress + ", contactName=" + contactName + ", date=" + date + "]";
 	}
 	
 }

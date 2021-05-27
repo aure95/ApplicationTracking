@@ -23,7 +23,7 @@ public class AnnonceResource {
 	
 	@GetMapping("/test")
 	public String testBddAnnonce(){
-		annonceService.test();
+//		annonceService.test();
 		return "OK";
 	}
 }

@@ -3,8 +3,10 @@ package com.perso.aure.application.domain;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -15,22 +17,24 @@ import javax.persistence.OneToOne;
 public class Application {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private Date date;
-	private String label_status;
+//	private String statusLabel;
 	
 	@ManyToOne(optional = false)
-	@JoinColumn(name= "fk_status_label", referencedColumnName= "label")
+	@JoinColumn(name= "status_label", referencedColumnName= "label")
 	private Status status;
 	
 	@OneToMany(mappedBy = "application")
 	private List<Interview> interview;
 	
-	@OneToOne(mappedBy = "application")
+	@OneToOne
+	@JoinColumn(name = "motivation_letter_id", referencedColumnName = "id")
 	private MotivationLetter motivationLetter;
 	
-	@OneToOne(mappedBy = "application")
+	@OneToOne(optional = false)
+	@JoinColumn(name = "entreprise_name", referencedColumnName = "name")
 	private Entreprise entreprise;
 	
 	public Integer getId() {
@@ -49,13 +53,13 @@ public class Application {
 		this.date = date;
 	}
 	
-	public String getLabel_status() {
-		return label_status;
-	}
+//	public String getStatusLabel() {
+//		return statusLabel;
+//	}
 	
-	public void setLabel_status(String label_status) {
-		this.label_status = label_status;
-	}
+//	public void setStatusLabel(String statusLabel) {
+//		this.statusLabel = statusLabel;
+//	}
 	
 	public Status getStatus() {
 		return status;
@@ -90,9 +94,8 @@ public class Application {
 	}
 	
 	public String toString() {
-		return "Application [id=" + id + ", date=" + date + ", label_status=" + label_status + ", status=" + status
-				+ ", interview=" + interview + ", motivationLetter=" + motivationLetter + ", entreprise=" + entreprise
-				+ "]";
+		return "Application [id=" + id + ", date=" + date + ", status=" + status + ", interview=" + interview
+				+ ", motivationLetter=" + motivationLetter + ", entreprise=" + entreprise + "]";
 	}
 	
 }

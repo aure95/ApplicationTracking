@@ -2,6 +2,7 @@ package com.perso.aure.application.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
@@ -9,11 +10,11 @@ import javax.persistence.OneToOne;
 public class MotivationLetter {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String content;
 	
-	@OneToOne
+	@OneToOne(mappedBy = "motivationLetter")
 	private Application application;
 	
 	public Integer getId() {
@@ -40,7 +41,7 @@ public class MotivationLetter {
 	}
 	
 	public String toString() {
-		return "MotivationLetter [id=" + id + ", content=" + content + ", application=" + application + "]";
+		return "MotivationLetter [id=" + id + ", content=" + content + "]";
 	}
 	
 }

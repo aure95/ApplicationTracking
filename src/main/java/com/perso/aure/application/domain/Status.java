@@ -33,7 +33,7 @@ public class Status {
 	}
 
 	public String toString() {
-		return "Status [label=" + label + ", applications=" + applications + "]";
+		return "Status [label=" + label +"]";
 	}
 	
 }

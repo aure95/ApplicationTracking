@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Annonce {
@@ -26,7 +27,18 @@ public class Annonce {
 	@ManyToMany(mappedBy = "annonces")
 	private Set<Website> websites;
 	
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "entreprise_name", referencedColumnName = "name")
+	private Entreprise entreprise;
 	
+	public Entreprise getEntreprise() {
+		return entreprise;
+	}
+
+	public void setEntreprise(Entreprise entreprise) {
+		this.entreprise = entreprise;
+	}
+
 	public Set<Domain> getDomains() {
 		return domains;
 	}
@@ -69,7 +81,7 @@ public class Annonce {
 
 	public String toString() {
 		return "Annonce [url=" + url + ", name=" + name + ", date=" + date + ", domains=" + domains + ", websites="
-				+ websites + "]";
+				+ websites + ", entreprise=" + entreprise + "]";
 	}
 
 }
