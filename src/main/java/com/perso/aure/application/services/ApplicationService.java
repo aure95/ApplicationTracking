@@ -103,13 +103,16 @@ public class ApplicationService {
 	
 	public Annonce createAnnonce(Annonce annonce, Long applicationId) {
 		if (annonce != null) {
-			Application application = getApplication(applicationId);
-			if (application != null ) {
-				Entreprise entreprise = application.getEntreprise();
-				annonce.setEntreprise(entreprise);
-				annonce.setDate(Date.from(Instant.now()));
-				annonce = annonceService.create(annonce);
-				
+			try {
+				Application application = getApplication(applicationId);
+				if (application != null ) {
+					Entreprise entreprise = application.getEntreprise();
+					annonce.setEntreprise(entreprise);
+					annonce.setDate(Date.from(Instant.now()));
+					annonce = annonceService.create(annonce);
+				}
+			} catch (Exception e) {
+				annonce = null;
 			}
 		}
 		return annonce;
